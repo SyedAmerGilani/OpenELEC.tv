@@ -51,7 +51,7 @@ fi
 UBOOT_TARGET=""
 PS3='Selected choice: '
 echo "Select target system:"
-options=("SolidRun CuBox-i" "TBS Matrix" "Quit")
+options=("SolidRun CuBox-i" "TBS Matrix" "Wandboard Quad" "Wandboard Solo and Dual" "Quit")
 select opt in "${options[@]}"; do
   case $opt in
     "SolidRun CuBox-i")
@@ -60,6 +60,14 @@ select opt in "${options[@]}"; do
       ;;
     "TBS Matrix")
       UBOOT_TARGET=matrix
+      break
+      ;;
+    "Wandboard Solo and Dual")
+      UBOOT_TARGET=wandboard_dl
+      break
+      ;;
+    "Wandboard Quad")
+      UBOOT_TARGET=wandboard_q
       break
       ;;
     "Quit")
