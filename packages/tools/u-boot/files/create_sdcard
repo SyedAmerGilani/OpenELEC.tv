@@ -277,13 +277,13 @@ echo "#########################################################"
   fi
 
   echo "installing u-boot bootloader..."
-  if [ "3rdparty/bootloader/SPL-$UBOOT_TARGET" ]; then
+  if [ -f "3rdparty/bootloader/SPL-$UBOOT_TARGET" ]; then
     dd if="3rdparty/bootloader/SPL-$UBOOT_TARGET" of="$DISK" bs=512 seek=2 conv=notrunc
-  elif [ "3rdparty/bootloader/u-boot-$UBOOT_TARGET.imx" ]; then
+  elif [ -f "3rdparty/bootloader/u-boot-$UBOOT_TARGET.imx" ]; then
     dd if="3rdparty/bootloader/u-boot-$UBOOT_TARGET.imx" of="$DISK" bs=512 seek=2 conv=notrunc
-  elif [ "3rdparty/bootloader/SPL" ]; then
+  elif [ -f "3rdparty/bootloader/SPL" ]; then
     dd if="3rdparty/bootloader/SPL" of="$DISK" bs=512 seek=2 conv=notrunc
-  elif [ "3rdparty/bootloader/u-boot.imx" ]; then
+  elif [ -f "3rdparty/bootloader/u-boot.imx" ]; then
     dd if="3rdparty/bootloader/u-boot.imx" of="$DISK" bs=512 seek=2 conv=notrunc
   fi
 
