@@ -51,7 +51,7 @@ fi
 UBOOT_TARGET=""
 PS3='Selected choice: '
 echo "Select target system:"
-options=("SolidRun CuBox-i" "TBS Matrix" "Quit")
+options=("SolidRun CuBox-i" "TBS Matrix" "Wandboard Quad" "Wandboard Solo and Dual" "Quit")
 select opt in "${options[@]}"; do
   case $opt in
     "SolidRun CuBox-i")
@@ -60,6 +60,14 @@ select opt in "${options[@]}"; do
       ;;
     "TBS Matrix")
       UBOOT_TARGET=matrix
+      break
+      ;;
+    "Wandboard Solo and Dual")
+      UBOOT_TARGET=wandboard_dl
+      break
+      ;;
+    "Wandboard Quad")
+      UBOOT_TARGET=wandboard_q
       break
       ;;
     "Quit")
@@ -269,13 +277,13 @@ echo "#########################################################"
   fi
 
   echo "installing u-boot bootloader..."
-  if [ "3rdparty/bootloader/SPL-$UBOOT_TARGET" ]; then
+  if [ -f "3rdparty/bootloader/SPL-$UBOOT_TARGET" ]; then
     dd if="3rdparty/bootloader/SPL-$UBOOT_TARGET" of="$DISK" bs=512 seek=2 conv=notrunc
-  elif [ "3rdparty/bootloader/u-boot-$UBOOT_TARGET.imx" ]; then
+  elif [ -f "3rdparty/bootloader/u-boot-$UBOOT_TARGET.imx" ]; then
     dd if="3rdparty/bootloader/u-boot-$UBOOT_TARGET.imx" of="$DISK" bs=512 seek=2 conv=notrunc
-  elif [ "3rdparty/bootloader/SPL" ]; then
+  elif [ -f "3rdparty/bootloader/SPL" ]; then
     dd if="3rdparty/bootloader/SPL" of="$DISK" bs=512 seek=2 conv=notrunc
-  elif [ "3rdparty/bootloader/u-boot.imx" ]; then
+  elif [ -f "3rdparty/bootloader/u-boot.imx" ]; then
     dd if="3rdparty/bootloader/u-boot.imx" of="$DISK" bs=512 seek=2 conv=notrunc
   fi
 
